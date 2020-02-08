@@ -19,10 +19,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 4.1, 8.1, 11.8 ),
-"transitions": PoolRealArray( -2, -2, -2, -2 ),
+"times": PoolRealArray( 0, 4.1, 8.1, 10.1 ),
+"transitions": PoolRealArray( -2, -2, -2.92817, -3.73213 ),
 "update": 0,
-"values": [ Vector2( 753.756, 314.336 ), Vector2( 69.7562, 234.336 ), Vector2( 256.756, 575.336 ), Vector2( 516.756, 530.336 ) ]
+"values": [ Vector2( 753.756, 314.336 ), Vector2( 69.7562, 234.336 ), Vector2( 256.632, 500 ), Vector2( 300, 400 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -89,37 +89,40 @@ position = Vector2( 628.98, 351.962 )
 [node name="shadow_caster19" parent="casters" instance=ExtResource( 6 )]
 position = Vector2( 489.018, 274.983 )
 
+[node name="shadow_caster20" parent="casters" instance=ExtResource( 6 )]
+position = Vector2( 1383.61, 262.153 )
+
 [node name="floor" parent="casters" instance=ExtResource( 6 )]
-position = Vector2( 431.469, 702.518 )
-scale = Vector2( 27.2465, 10 )
+position = Vector2( 1178.77, 702.518 )
+scale = Vector2( 74.136, 10 )
 
 [node name="wall" parent="casters" instance=ExtResource( 6 )]
 position = Vector2( -54.4152, 411.743 )
 scale = Vector2( 2.85788, 25.9706 )
 
 [node name="wall2" parent="casters" instance=ExtResource( 6 )]
-position = Vector2( 924.906, 391.602 )
+position = Vector2( 2341.63, 411.743 )
 scale = Vector2( 2.85788, 25.9706 )
 
 [node name="ceiling" parent="casters" instance=ExtResource( 6 )]
-position = Vector2( 435.547, -14.3765 )
-scale = Vector2( 33.3043, 0.873936 )
+position = Vector2( 1121.18, -14.3765 )
+scale = Vector2( 76.1564, 0.873936 )
 
 [node name="floor2" parent="casters" instance=ExtResource( 6 )]
 position = Vector2( 444.057, 658.018 )
 scale = Vector2( 8.2076, 12.7813 )
 
-[node name="Player" parent="." instance=ExtResource( 5 )]
-position = Vector2( 140.136, 462.188 )
-
 [node name="green_light" type="Light2D" parent="."]
-position = Vector2( 753.756, 314.336 )
+position = Vector2( 313.483, 262.842 )
 texture = ExtResource( 3 )
 color = Color( 0.49247, 0.878537, 0.409146, 1 )
 shadow_enabled = true
 shadow_gradient_length = 1.2
 shadow_filter = 3
 shadow_filter_smooth = 7.1
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="blob" type="Sprite" parent="green_light"]
 material = SubResource( 1 )
@@ -131,13 +134,16 @@ anims/m2 = SubResource( 2 )
 anims/motion = SubResource( 3 )
 
 [node name="blue_light" type="Light2D" parent="."]
-position = Vector2( 692.1, 31.1126 )
+position = Vector2( 680.355, 31.1126 )
 texture = ExtResource( 3 )
 color = Color( 0.396752, 0.446392, 0.929792, 1 )
 shadow_enabled = true
 shadow_gradient_length = 1.4
 shadow_filter = 3
 shadow_filter_smooth = 5.3
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="blob" type="Sprite" parent="blue_light"]
 material = SubResource( 4 )
@@ -149,7 +155,4 @@ anims/motion = SubResource( 3 )
 anims/motion2 = SubResource( 2 )
 anims/motion3 = SubResource( 5 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-visible = false
-offset = Vector2( 400, 300 )
-current = true
+[node name="KinematicBody2D" parent="." instance=ExtResource( 5 )]
