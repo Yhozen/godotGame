@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="2D Lighting"
-run/main_scene="res://light_shadows.tscn"
+run/main_scene="res://Scenes/main.tscn"
 config/icon="res://icon.png"
 
 [display]
