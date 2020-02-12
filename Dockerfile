@@ -11,21 +11,26 @@
 #	-v $(pwd):/build/src -v /tmp/output:/build/output gamedrivendesign/godot-export
 
 
-FROM alpine:edge
+FROM w8jcik/arch-aurman
 
 ARG GODOT_VERSION=3.2
 
-WORKDIR /bu
+RUN pacman  --noconfirm -Syu
+RUN pacman  --noconfirm -S git go 
 
-RUN apk --no-cache add ca-certificates wget
+# create user and set sudo priv
+RUN useradd -m aurman -s /bin/bash
+RUN echo 'aurman ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
-RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub \
-    && wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-2.29-r0.apk \
-    && apk add glibc-2.29-r0.apk
+# switch user and workdir
+USER aurman
+WORKDIR /home/aurman
 
-RUN wget -q --waitretry=1 --retry-connrefused -T 10 https://downloads.tuxfamily.org/godotengine/$GODOT_VERSION/Godot_v$GODOT_VERSION-stable_linux_server.64.zip -O /tmp/godot.zip \
-    && unzip -q -d /tmp /tmp/godot.zip \
-    && mv /tmp/Godot* /build/godot
+ADD PKGBUILD PKGBUILD
+RUN makepkg --noconfirm -si
+
+RUN sudo pacman -S --noconfirm unzip  
+
 
 RUN wget -q --waitretry=1 --retry-connrefused -T 10 https://downloads.tuxfamily.org/godotengine/$GODOT_VERSION/Godot_v$GODOT_VERSION-stable_export_templates.tpz -O /tmp/export-templates.tpz \
     && mkdir -p /tmp/data/godot/templates \
@@ -40,4 +45,8 @@ RUN mkdir -p /tmp/cache && mkdir -p /tmp/data && mkdir -p /tmp/config
 ENV EXPORT_NAME HTML5
 ENV OUTPUT_FILENAME index.html
 
-CMD ["sh", "-c", "/build/godot --export \"${EXPORT_NAME}\" --path /build/src \"/build/output/${OUTPUT_FILENAME}\""]
+WORKDIR /build
+
+RUN echo $PATH
+
+CMD ["sh", "-c", "godot-headless --export \"${EXPORT_NAME}\" --path /build/src \"/build/output/${OUTPUT_FILENAME}\""]
