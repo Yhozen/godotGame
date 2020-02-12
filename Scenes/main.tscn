@@ -7,7 +7,7 @@
 [ext_resource path="res://Components/Player/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Music/main.wav" type="AudioStream" id=6]
 
-[sub_resource type="NavigationPolygon" id=6]
+[sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 313.832, 454.222, 314.531, 544.308, -8.10066, 545.006, -6.70447, 0.30365, 2295.01, -0.394684, 577.803, 451.429, 2297.11, 542.213, 577.803, 545.704 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 3, 4, 5 ), PoolIntArray( 5, 4, 6, 7 ) ]
 outlines = [ PoolVector2Array( -8.10066, 545.006, 314.531, 544.308, 313.832, 454.222, 577.803, 451.429, 577.803, 545.704, 2297.11, 542.213, 2295.01, -0.394684, -6.70447, 0.30365 ) ]
@@ -68,13 +68,6 @@ scale = Vector2( 76.1564, 0.873936 )
 position = Vector2( 444.057, 658.018 )
 scale = Vector2( 8.2076, 12.7813 )
 
-[node name="green_light" parent="." instance=ExtResource( 1 )]
-position = Vector2( 669.922, 493.676 )
-
-[node name="blueLight" parent="." instance=ExtResource( 1 )]
-position = Vector2( 618.173, 181.131 )
-color = Color( 0.396078, 0.447059, 0.929412, 1 )
-
 [node name="KinematicBody2D" parent="." instance=ExtResource( 5 )]
 position = Vector2( 135.905, 498.991 )
 
@@ -87,4 +80,13 @@ autoplay = true
 visible = false
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
-navpoly = SubResource( 6 )
+navpoly = SubResource( 1 )
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="green_light" parent="Enemies" instance=ExtResource( 1 )]
+position = Vector2( 669.922, 493.676 )
+
+[node name="blueLight" parent="Enemies" instance=ExtResource( 1 )]
+position = Vector2( 1925.3, 130.482 )
+color = Color( 0.396078, 0.447059, 0.929412, 1 )

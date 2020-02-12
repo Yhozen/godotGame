@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Components/Player/light.png" type="Texture" id=1]
 [ext_resource path="res://spot.png" type="Texture" id=2]
@@ -6,6 +6,9 @@
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 25.0
 
 [node name="green_light" type="Light2D"]
 position = Vector2( 753.756, 314.336 )
@@ -23,3 +26,8 @@ __meta__ = {
 [node name="blob" type="Sprite" parent="."]
 material = SubResource( 1 )
 texture = ExtResource( 2 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+shape = SubResource( 2 )
