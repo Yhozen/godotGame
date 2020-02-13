@@ -14,4 +14,4 @@ data_*/
 .DS_Store
 
 # Builds
-build/
+output/
