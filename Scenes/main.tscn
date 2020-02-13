@@ -49,27 +49,27 @@ position = Vector2( 489.018, 274.983 )
 position = Vector2( 1383.61, 262.153 )
 
 [node name="floor" parent="casters" instance=ExtResource( 3 )]
-position = Vector2( 1175.61, 702.518 )
-scale = Vector2( 74.3334, 10 )
+position = Vector2( 1175.61, 585.358 )
+scale = Vector2( 74.3334, 2.67752 )
 
 [node name="wall" parent="casters" instance=ExtResource( 3 )]
-position = Vector2( -54.4152, 411.743 )
-scale = Vector2( 2.85788, 25.9706 )
+position = Vector2( -52.9078, 315.273 )
+scale = Vector2( 2.85788, 19.9412 )
 
 [node name="wall2" parent="casters" instance=ExtResource( 3 )]
-position = Vector2( 2342.66, 411.23 )
-scale = Vector2( 2.85788, 25.9706 )
+position = Vector2( 2342.66, 300.505 )
+scale = Vector2( 2.85788, 20.5242 )
 
 [node name="ceiling" parent="casters" instance=ExtResource( 3 )]
 position = Vector2( 1121.18, -14.3765 )
 scale = Vector2( 76.1564, 0.873936 )
 
 [node name="floor2" parent="casters" instance=ExtResource( 3 )]
-position = Vector2( 444.057, 658.018 )
-scale = Vector2( 8.2076, 12.7813 )
+position = Vector2( 444.057, 535.923 )
+scale = Vector2( 8.2076, 5.15038 )
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 5 )]
-position = Vector2( 135.905, 498.991 )
+position = Vector2( 134.398, 500.498 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
@@ -80,6 +80,7 @@ autoplay = true
 visible = false
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
+visible = false
 navpoly = SubResource( 1 )
 
 [node name="Enemies" type="Node" parent="."]
@@ -88,5 +89,6 @@ navpoly = SubResource( 1 )
 position = Vector2( 669.922, 493.676 )
 
 [node name="blueLight" parent="Enemies" instance=ExtResource( 1 )]
+visible = false
 position = Vector2( 1925.3, 130.482 )
 color = Color( 0.396078, 0.447059, 0.929412, 1 )
