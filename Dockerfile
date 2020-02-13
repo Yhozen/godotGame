@@ -33,6 +33,7 @@ RUN makepkg --noconfirm -si
 
 RUN sudo pacman -S --noconfirm unzip wget
 
+USER root
 
 RUN wget -q --waitretry=1 --retry-connrefused -T 10 https://downloads.tuxfamily.org/godotengine/$GODOT_VERSION/Godot_v$GODOT_VERSION-stable_export_templates.tpz -O /tmp/export-templates.tpz \
     && mkdir -p /tmp/data/godot/templates \
