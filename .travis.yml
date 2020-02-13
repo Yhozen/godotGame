@@ -43,6 +43,8 @@ deploy:
     api_key: $GITHUB_TOKEN
     file:
       - "${GAME_NAME}-linux.zip"
+      - "${GAME_NAME}-windows.zip"
+      - "${GAME_NAME}-mac.zip"
     on:
       # Create GitHub Releases for new git tags
       # regardless of the branch.
