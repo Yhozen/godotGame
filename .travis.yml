@@ -22,8 +22,8 @@ install:
 script:
   - docker run -e EXPORT_NAME="HTML5"           -e OUTPUT_FILENAME="index.html"           -v $(pwd):/build/src -v $(pwd)/output/html5:/build/output   "godot-html-builder:latest"
   - docker run -e EXPORT_NAME="Linux/X11"       -e OUTPUT_FILENAME="${GAME_NAME}"         -v $(pwd):/build/src -v $(pwd)/output/linux:/build/output   "godot-html-builder:latest"
-# - docker run -e EXPORT_NAME="Windows Desktop" -e OUTPUT_FILENAME="${GAME_NAME}.exe"     -v $(pwd):/build/src -v $(pwd)/output/windows:/build/output "gamedrivendesign/godot-export:${GODOT_VERSION}"
-# - docker run -e EXPORT_NAME="Mac OSX"         -e OUTPUT_FILENAME="${GAME_NAME}-mac.zip" -v $(pwd):/build/src -v $(pwd)/output/mac:/build/output     "gamedrivendesign/godot-export:${GODOT_VERSION}"
+  - docker run -e EXPORT_NAME="Windows Desktop" -e OUTPUT_FILENAME="${GAME_NAME}.exe"     -v $(pwd):/build/src -v $(pwd)/output/windows:/build/output "godot-html-builder:latest"
+  - docker run -e EXPORT_NAME="Mac OSX"         -e OUTPUT_FILENAME="${GAME_NAME}-mac.zip" -v $(pwd):/build/src -v $(pwd)/output/mac:/build/output     "godot-html-builder:latest"
 
 # Now comes deployment related code.
 # To make this work, you need to set a GITHUB_TOKEN environment variable through
@@ -33,9 +33,8 @@ script:
 # three desktop platforms
 before_deploy:
   - zip -j "${GAME_NAME}-linux.zip"   output/linux/*
-# - zip -j "${GAME_NAME}-windows.zip" output/windows/*
-# No need to zip the mac game, because it already is a zip
-# - cp -R output/mac/* .
+  - zip -j "${GAME_NAME}-windows.zip" output/windows/*
+  - cp -R output/mac/* .
 
 deploy:
   # The following block is responsible to upload the zip files
