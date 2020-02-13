@@ -11,12 +11,14 @@
 #	-v $(pwd):/build/src -v /tmp/output:/build/output gamedrivendesign/godot-export
 
 
-FROM w8jcik/arch-aurman
+FROM archlinux
 
 ARG GODOT_VERSION=3.2
 
 RUN pacman  --noconfirm -Syu
-RUN pacman  --noconfirm -S git go 
+RUN pacman  --noconfirm -S fakeroot sudo binutils
+
+RUN echo 'Set disable_coredump false' > /etc/sudo.conf
 
 # create user and set sudo priv
 RUN useradd -m aurman -s /bin/bash
@@ -29,7 +31,7 @@ WORKDIR /home/aurman
 ADD PKGBUILD PKGBUILD
 RUN makepkg --noconfirm -si
 
-RUN sudo pacman -S --noconfirm unzip  
+RUN sudo pacman -S --noconfirm unzip wget
 
 
 RUN wget -q --waitretry=1 --retry-connrefused -T 10 https://downloads.tuxfamily.org/godotengine/$GODOT_VERSION/Godot_v$GODOT_VERSION-stable_export_templates.tpz -O /tmp/export-templates.tpz \
