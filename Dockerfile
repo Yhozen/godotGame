@@ -10,7 +10,7 @@ ADD PKGBUILD PKGBUILD
 RUN makepkg --noconfirm -si
 
 USER root
-RUN pacman  --noconfirm -Syu  unzip wget fakeroot sudo binutils
+RUN pacman  --noconfirm -Syu  unzip wget
 
 ARG GODOT_VERSION=3.2
 
