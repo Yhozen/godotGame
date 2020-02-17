@@ -9,8 +9,9 @@ env:
   # If your version is not available, please open an issue here: https://github.com/GameDrivenDesign/docker-godot-export
   - GAME_NAME="ThatVeryFarMountain" GODOT_VERSION="3.2"
 
-install:
+before_install:
   - openssl aes-256-cbc -K $encrypted_20574dde555e_key -iv $encrypted_20574dde555e_iv -in debug.keystore.enc -out debug.keystore -d
+install:
   - docker build . -t godot-html-builder
     # Each of the following lines exports the game for a given platform.
     # You can specify the platform in the EXPORT_NAME variable

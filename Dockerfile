@@ -6,6 +6,7 @@ RUN echo 'Set disable_coredump false' > /etc/sudo.conf && useradd -m aurman -s /
 USER aurman
 WORKDIR /home/aurman
 
+ADD debug.keystore debug.keystore
 ADD PKGBUILD PKGBUILD
 RUN makepkg --noconfirm -si
 
@@ -34,11 +35,5 @@ RUN echo "[gd_resource type=\"EditorSettings\" format=2]" >> $XDG_CONFIG_HOME/go
     && echo "export/android/adb = \"$(which adb)\"" >> $XDG_CONFIG_HOME/godot/editor_settings-3.tres \
     && echo "export/android/jarsigner = \"$(which jarsigner)\"" >> $XDG_CONFIG_HOME/godot/editor_settings-3.tres \
     && echo "export/android/debug_keystore = \"$(pwd)/debug.keystore\"" >> $XDG_CONFIG_HOME/godot/editor_settings-3.tres
-RUN ls
-ADD debug.keystore debug.keystore
-RUN ls
-RUN cat $XDG_CONFIG_HOME/godot/editor_settings-3.tres
-
-RUN cat $XDG_CONFIG_HOME/godot/editor_settings-3.tres
 
 CMD ["sh", "-c", "godot-headless --export \"${EXPORT_NAME}\" --path /build/src \"/build/output/${OUTPUT_FILENAME}\""]
