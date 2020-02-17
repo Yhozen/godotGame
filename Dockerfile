@@ -42,7 +42,8 @@ RUN echo "[gd_resource type=\"EditorSettings\" format=2]" >> $XDG_CONFIG_HOME/go
     && echo "export/android/jarsigner = \"$(which jarsigner)\"" >> $XDG_CONFIG_HOME/godot/editor_settings-3.tres \
     && echo "export/android/debug_keystore = \"$(pwd)/debug.keystore\"" >> $XDG_CONFIG_HOME/godot/editor_settings-3.tres
 
-ADD debug.keystore debug.keystore
+ADD /build/src/debug.keystore debug.keystore
+RUN ls
 RUN cat $XDG_CONFIG_HOME/godot/editor_settings-3.tres
 
 RUN cat $XDG_CONFIG_HOME/godot/editor_settings-3.tres
