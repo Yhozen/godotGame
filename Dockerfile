@@ -2,6 +2,7 @@ FROM m0rf30/arch-yay
 
 RUN  yay -S --noconfirm android-sdk-platform-tools android-udev android-sdk && export ANDROID_HOME=/opt/android-sdk && export PATH=$PATH:$ANDROID_HOME/tools && export PATH=$PATH:$ANDROID_HOME/platform-tools
 
+RUN ls
 
 ENV ANDROID_HOME /opt/android-sdk
 ENV PATH $PATH:$ANDROID_HOME/tools
@@ -41,7 +42,7 @@ RUN echo "[gd_resource type=\"EditorSettings\" format=2]" >> $XDG_CONFIG_HOME/go
     && echo "export/android/adb = \"$(which adb)\"" >> $XDG_CONFIG_HOME/godot/editor_settings-3.tres \
     && echo "export/android/jarsigner = \"$(which jarsigner)\"" >> $XDG_CONFIG_HOME/godot/editor_settings-3.tres \
     && echo "export/android/debug_keystore = \"$(pwd)/debug.keystore\"" >> $XDG_CONFIG_HOME/godot/editor_settings-3.tres
-
+RUN ls
 ADD /build/src/debug.keystore debug.keystore
 RUN ls
 RUN cat $XDG_CONFIG_HOME/godot/editor_settings-3.tres
