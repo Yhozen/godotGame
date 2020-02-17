@@ -10,15 +10,16 @@ env:
   - GAME_NAME="ThatVeryFarMountain" GODOT_VERSION="3.2"
 
 install:
+  - openssl aes-256-cbc -K $encrypted_20574dde555e_key -iv $encrypted_20574dde555e_iv -in debug.keystore.enc -out debug.keystore -d
   - docker build . -t godot-html-builder
-  # Each of the following lines exports the game for a given platform.
-  # You can specify the platform in the EXPORT_NAME variable
-  # The exported game will be written to the folder specified after the second "-v" flag
-  # "-v $(pwd)/output/html5:/build/output" writes the exported game to  the "output/html5" folder.
-  #
-  # Make sure that you have created an `export_presets.cfg` file with all necessary export
-  # templates (HTML5, Linux/X11, Windows Desktop, Max OSX) as described in the Godot documentation:
-  # https://docs.godotengine.org/en/3.1/getting_started/workflow/export/exporting_projects.html
+    # Each of the following lines exports the game for a given platform.
+    # You can specify the platform in the EXPORT_NAME variable
+    # The exported game will be written to the folder specified after the second "-v" flag
+    # "-v $(pwd)/output/html5:/build/output" writes the exported game to  the "output/html5" folder.
+    #
+    # Make sure that you have created an `export_presets.cfg` file with all necessary export
+    # templates (HTML5, Linux/X11, Windows Desktop, Max OSX) as described in the Godot documentation:
+    # https://docs.godotengine.org/en/3.1/getting_started/workflow/export/exporting_projects.html
 # Now comes deployment related code.
 # To make this work, you need to set a GITHUB_TOKEN environment variable through
 # the TravisCI web ui. For more information take a look at the TravisCI docs:
@@ -32,8 +33,6 @@ deploy:
     skip-cleanup: true
     api_key: $GITHUB_TOKEN
     before_install:
-      - openssl aes-256-cbc -K $encrypted_20574dde555e_key -iv $encrypted_20574dde555e_iv -in debug.keystore.enc -out debug.keystore -d
-    before_script:
       - openssl aes-256-cbc -K $encrypted_20574dde555e_key -iv $encrypted_20574dde555e_iv -in debug.keystore.enc -out debug.keystore -d
     script:
       - docker run -e EXPORT_NAME="Linux/X11"       -e OUTPUT_FILENAME="${GAME_NAME}"         -v $(pwd):/build/src -v $(pwd)/output/linux:/build/output   "godot-html-builder:latest"
