@@ -1,12 +1,4 @@
-FROM m0rf30/arch-yay
-
-RUN  yay -S --noconfirm android-sdk-platform-tools android-udev android-sdk && export ANDROID_HOME=/opt/android-sdk && export PATH=$PATH:$ANDROID_HOME/tools && export PATH=$PATH:$ANDROID_HOME/platform-tools
-
-RUN ls
-
-ENV ANDROID_HOME /opt/android-sdk
-ENV PATH $PATH:$ANDROID_HOME/tools
-ENV PATH $PATH:$ANDROID_HOME/platform-tools
+FROM garox/arch-android-sdk
 
 USER root 
 RUN echo 'Set disable_coredump false' > /etc/sudo.conf && useradd -m aurman -s /bin/bash && echo 'aurman ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
