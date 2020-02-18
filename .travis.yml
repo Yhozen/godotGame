@@ -27,7 +27,8 @@ install:
 # https://docs.travis-ci.com/user/deployment/pages/#Setting-the-GitHub-token
 # This creates zip files from the exported game builds for the
 # three desktop platforms
-
+script:
+  - echo ""
 deploy:
   # The following block is responsible to upload the zip files
   - provider: releases
