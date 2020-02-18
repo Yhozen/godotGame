@@ -25,13 +25,13 @@ env:
 before_install:
   - openssl aes-256-cbc -K $encrypted_20574dde555e_key -iv $encrypted_20574dde555e_iv -in debug.keystore.enc -out debug.keystore -d
 install:
-  - docker build . -t godot-html-builder
+  - docker build . -t godot-builder
 script:
-  - docker run -e EXPORT_NAME="Linux/X11"       -e OUTPUT_FILENAME="${GAME_NAME}"         -v $(pwd):/build/src -v $(pwd)/output/linux:/build/output   "godot-html-builder:latest"
-  - docker run -e EXPORT_NAME="Windows Desktop" -e OUTPUT_FILENAME="${GAME_NAME}.exe"     -v $(pwd):/build/src -v $(pwd)/output/windows:/build/output "godot-html-builder:latest"
-  - docker run -e EXPORT_NAME="Mac OSX"         -e OUTPUT_FILENAME="${GAME_NAME}-mac.zip" -v $(pwd):/build/src -v $(pwd)/output/mac:/build/output     "godot-html-builder:latest"
-  - docker run -e EXPORT_NAME="Android"         -e OUTPUT_FILENAME="${GAME_NAME}.apk" -v $(pwd):/build/src -v $(pwd)/output/android:/build/output     "godot-html-builder:latest"
-  - docker run -e EXPORT_NAME="HTML5"           -e OUTPUT_FILENAME="index.html"           -v $(pwd):/build/src -v $(pwd)/output/html5:/build/output   "godot-html-builder:latest"
+  - docker run -e EXPORT_NAME="Linux/X11"       -e OUTPUT_FILENAME="${GAME_NAME}"         -v $(pwd):/build/src -v $(pwd)/output/linux:/build/output   "godot-builder:latest"
+  - docker run -e EXPORT_NAME="Windows Desktop" -e OUTPUT_FILENAME="${GAME_NAME}.exe"     -v $(pwd):/build/src -v $(pwd)/output/windows:/build/output "godot-builder:latest"
+  - docker run -e EXPORT_NAME="Mac OSX"         -e OUTPUT_FILENAME="${GAME_NAME}-mac.zip" -v $(pwd):/build/src -v $(pwd)/output/mac:/build/output     "godot-builder:latest"
+  - docker run -e EXPORT_NAME="Android"         -e OUTPUT_FILENAME="${GAME_NAME}.apk" -v $(pwd):/build/src -v $(pwd)/output/android:/build/output     "godot-builder:latest"
+  - docker run -e EXPORT_NAME="HTML5"           -e OUTPUT_FILENAME="index.html"           -v $(pwd):/build/src -v $(pwd)/output/html5:/build/output   "godot-builder:latest"
 before_deploy:
   - zip -j "${GAME_NAME}-linux.zip"   output/linux/*
   - zip -j "${GAME_NAME}-windows.zip" output/windows/*
