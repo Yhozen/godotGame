@@ -8,11 +8,6 @@ env:
   # found here: https://cloud.docker.com/u/gamedrivendesign/repository/docker/gamedrivendesign/godot-export/tags
   # If your version is not available, please open an issue here: https://github.com/GameDrivenDesign/docker-godot-export
   - GAME_NAME="ThatVeryFarMountain" GODOT_VERSION="3.2"
-
-before_install:
-  - openssl aes-256-cbc -K $encrypted_20574dde555e_key -iv $encrypted_20574dde555e_iv -in debug.keystore.enc -out debug.keystore -d
-install:
-  - docker build . -t godot-html-builder
     # Each of the following lines exports the game for a given platform.
     # You can specify the platform in the EXPORT_NAME variable
     # The exported game will be written to the folder specified after the second "-v" flag
@@ -27,8 +22,7 @@ install:
 # https://docs.travis-ci.com/user/deployment/pages/#Setting-the-GitHub-token
 # This creates zip files from the exported game builds for the
 # three desktop platforms
-script:
-  - echo ""
+
 deploy:
   # The following block is responsible to upload the zip files
   - provider: releases
@@ -36,6 +30,8 @@ deploy:
     api_key: $GITHUB_TOKEN
     before_install:
       - openssl aes-256-cbc -K $encrypted_20574dde555e_key -iv $encrypted_20574dde555e_iv -in debug.keystore.enc -out debug.keystore -d
+    install:
+      - docker build . -t godot-html-builder
     script:
       - docker run -e EXPORT_NAME="Linux/X11"       -e OUTPUT_FILENAME="${GAME_NAME}"         -v $(pwd):/build/src -v $(pwd)/output/linux:/build/output   "godot-html-builder:latest"
       - docker run -e EXPORT_NAME="Windows Desktop" -e OUTPUT_FILENAME="${GAME_NAME}.exe"     -v $(pwd):/build/src -v $(pwd)/output/windows:/build/output "godot-html-builder:latest"
@@ -66,6 +62,8 @@ deploy:
   - provider: pages
     skip-cleanup: true
     github-token: $GITHUB_TOKEN
+    install:
+      - docker build . -t godot-html-builder
     script:
       - docker run -e EXPORT_NAME="HTML5"           -e OUTPUT_FILENAME="index.html"           -v $(pwd):/build/src -v $(pwd)/output/html5:/build/output   "godot-html-builder:latest"
     local-dir: output/html5
